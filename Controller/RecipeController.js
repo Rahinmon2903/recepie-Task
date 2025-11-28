@@ -15,3 +15,38 @@ export const createRecipe=async (req,res) => {
     }
     
 }
+
+//get all recipe
+export const getAllRecipe=async (req,res) => {
+    try {
+        //just displaying all recipe using find();
+        const Recipe=await recipe.find();
+       
+        res.status(200).json({message:"data retireved successfully",data: Recipe})
+        
+    } catch (error) {
+        res.status(503).json({message:"error in getting all recipe"})
+        
+    }
+    
+}
+//get  recipe by id
+export const getRecipeById=async (req,res) => {
+    try {
+        //getting id from params and find it using findById
+       const recipeId=req.params.id;
+       const result=await recipe.findById(recipeId);
+       if(!result){
+        return res.status(404).json({message:"No recipe Found"})
+
+       }
+       return res.status(200).json({message:" recipe Found",data:result})
+
+        
+    } catch (error) {
+        res.status(503).json({message:"error in getting recipe by id"})
+        
+    }
+    
+}
+
