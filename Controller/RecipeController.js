@@ -50,3 +50,27 @@ export const getRecipeById=async (req,res) => {
     
 }
 
+//get  updateRecipe by id
+export const updateRecipe=async (req,res) => {
+    try {
+       const recipeId=req.params.id;
+       const {recipeName,Ingredients,procedure}=req.body;
+       const result=await recipe.findByIdAndUpdate(
+        {_id:recipeId},
+        {recipeName,Ingredients,procedure},
+        {new:true}
+
+       );
+       if(result.matchedCount == 0){
+        return res.status(404).json({message:"No recipe Found"})
+
+       }
+       return res.status(200).json({message:" recipe updated successfully",data:result})
+
+        
+    } catch (error) {
+        res.status(503).json({message:"error in updating recipe"})
+        
+    }
+    
+}
