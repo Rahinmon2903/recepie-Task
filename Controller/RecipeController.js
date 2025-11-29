@@ -50,9 +50,10 @@ export const getRecipeById=async (req,res) => {
     
 }
 
-//get  updateRecipe by id
+//updateRecipe by id
 export const updateRecipe=async (req,res) => {
     try {
+         //getting id from params and updating it using findByIdAndUpdate
        const recipeId=req.params.id;
        const {recipeName,Ingredients,procedure}=req.body;
        const result=await recipe.findByIdAndUpdate(
@@ -74,3 +75,29 @@ export const updateRecipe=async (req,res) => {
     }
     
 }
+
+
+
+//deleteRecipe by id
+export const deleteRecipe = async (req, res) => {
+  try {
+    //getting id from params and deleting it using findByIdAndDelete
+    const recipeId = req.params.id;
+
+    const result = await recipe.findByIdAndDelete(recipeId);
+
+    if (!result) {
+      return res.status(404).json({ message: "No recipe Found" });
+    }
+
+    return res
+      .status(200)
+      .json({ message: "Recipe deleted successfully", data: result });
+
+  } catch (error) {
+    return res
+      .status(503)
+      .json({ message: "Error in deleting recipe", error: error.message });
+  }
+};
+
