@@ -23,6 +23,11 @@ Clean and simple REST endpoints
 👉 View Full Documentation:
 [API LINK](https://documenter.getpostman.com/view/44991925/2sB3dLUC2B)
 
+🔗 Deployment
+
+([Deployment link](https://recepie-task.onrender.com/))
+
+
 
 
 📦 Tech Stack
